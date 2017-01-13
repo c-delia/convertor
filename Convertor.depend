@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1484324602 source:d:\scoala\sem1\ip\convertor\main.cpp
+	<iostream>
+	<fstream>
+	<cstring>
+
