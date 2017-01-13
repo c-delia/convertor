@@ -13,10 +13,19 @@ struct transforma
 
 ifstream fin("unitati.in");
 
-long double transfLungime[8][8], transfArie[10][10], transfVolum[10][10], transfTimp[dmax][dmax], transfViteza[dmax][dmax],
-transfTemperatura[dmax][dmax], transfMasa[dmax][dmax], transfEnergie[dmax][dmax], transfPresiune[dmax][dmax], transfDensitate[dmax][dmax], transfConsum[dmax][dmax];
+long double transfLungime[dmax][dmax];
+long double transfArie[dmax][dmax];
+long double transfVolum[dmax][dmax];
+long double transfTimp[dmax][dmax];
+long double transfViteza[dmax][dmax];
+long double transfTemperatura[dmax][dmax];
+long double transfMasa[dmax][dmax];
+long double transfEnergie[dmax][dmax];
+long double transfPresiune[dmax][dmax];
+long double transfDensitate[dmax][dmax];
+long double transfConsum[dmax][dmax];
 
-int AlegeUnitate();
+int Meniu();
 
 void initializareLungime();
 void initializareArie();
@@ -42,15 +51,15 @@ transforma Presiune();
 transforma Densitate();
 transforma Consum();
 
-char unitateMasura[12];
-char unitate1[10], unitate2[10];
+void initializeazaUnitati();
+
 int main()
 {
     transforma transf;
     int comanda;
     long double rezultat;
-    initializareLungime();
-    comanda=AlegeUnitate();
+    initializeazaUnitati();
+    comanda=Meniu();
     while(comanda)
     {
         if(comanda==1)
@@ -127,19 +136,27 @@ int main()
         }
         if(comanda==10)
         {
-
+            transf=Densitate();
+            rezultat=transf.valoare*transfDensitate[transf.unit1][transf.unit2];
+            cout<<"********************"<<'\n';
+            cout<<"Rezultatul este: "<<rezultat<<'\n';
+            cout<<"********************"<<'\n';
         }
         if(comanda==11)
         {
-
+            transf=Consum();
+            rezultat=transf.valoare*transfConsum[transf.unit1][transf.unit2];
+            cout<<"********************"<<'\n';
+            cout<<"Rezultatul este: "<<rezultat<<'\n';
+            cout<<"********************"<<'\n';
         }
-        comanda=AlegeUnitate();
+        comanda=Meniu();
     }
 
     return 0;
 }
 
-int AlegeUnitate()
+int Meniu()
 {
     int comanda;
     cout<<"0-Iesi din program"<<'\n';
@@ -154,7 +171,7 @@ int AlegeUnitate()
     cout<<"9-Presiune"<<'\n';
     cout<<"10-Densitate"<<'\n';
     cout<<"11-Consum combustibil"<<'\n';
-    cout<<"Alege unitatea de masura: ";
+    cout<<"Alege comanda: ";
     cin>>comanda;
     return comanda;
 }
@@ -183,8 +200,8 @@ void initializareVolum()
 void initializareTimp()
 {
     int i, j;
-    for(i=1; i<=6; i++)
-        for(j=1; j<=6; j++)
+    for(i=1; i<=10; i++)
+        for(j=1; j<=10; j++)
             fin>>transfTimp[i][j];
 }
 void initializareViteza()
@@ -225,15 +242,15 @@ void initializarePresiune()
 void initializareDensitate()
 {
     int i, j;
-    for(i=1; i<=7; i++)
-        for(j=1; j<=7; j++)
+    for(i=1; i<=10; i++)
+        for(j=1; j<=10; j++)
             fin>>transfDensitate[i][j];
 }
 void initializareConsum()
 {
     int i, j;
-    for(i=1; i<=7; i++)
-        for(j=1; j<=7; j++)
+    for(i=1; i<=3; i++)
+        for(j=1; j<=3; j++)
             fin>>transfConsum[i][j];
 }
 
@@ -297,6 +314,10 @@ transforma Timp()
     cout<<"4-Secunda"<<'\n';
     cout<<"5-Minut"<<'\n';
     cout<<"6-Ora"<<'\n';
+    cout<<"7-Zile"<<'\n';
+    cout<<"8-Saptamani"<<'\n';
+    cout<<"10-Luni"<<'\n';
+    cout<<"12-Ani"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -337,7 +358,73 @@ transforma Masa()
     cout<<"Valoare: "; cin>>x.valoare;
     return x;
 }
-transforma Energie();
-transforma Presiune();
-transforma Densitate();
-transforma Consum();
+transforma Energie()
+{
+    transforma x;
+    cout<<"1-Calorii"<<'\n';
+    cout<<"2-Kilocalorii"<<'\n';
+    cout<<"3-Jouli"<<'\n';
+    cout<<"4-KiloJouli"<<'\n';
+    cout<<"5-Watt"<<'\n';
+    cout<<"6-KiloWatt"<<'\n';
+    cout<<"Din:"; cin>>x.unit1;
+    cout<<"In:"; cin>>x.unit2;
+    cout<<"Valoare: "; cin>>x.valoare;
+    return x;
+}
+transforma Presiune()
+{
+    transforma x;
+    cout<<"1-Atmosfere"<<'\n';
+    cout<<"2-Bari"<<'\n';
+    cout<<"3-mmHg"<<'\n';
+    cout<<"4-Psi"<<'\n';
+    cout<<"Din:"; cin>>x.unit1;
+    cout<<"In:"; cin>>x.unit2;
+    cout<<"Valoare: "; cin>>x.valoare;
+    return x;
+}
+transforma Densitate()
+{
+    transforma x;
+    cout<<"1-mg/cm^3"<<'\n';
+    cout<<"2-mg/l"<<'\n';
+    cout<<"3-g/mm^3"<<'\n';
+    cout<<"4-g/cm^3"<<'\n';
+    cout<<"5-g/m^3"<<'\n';
+    cout<<"6-g/l"<<'\n';
+    cout<<"7-kg/cm^3"<<'\n';
+    cout<<"8-kg/l"<<'\n';
+    cout<<"9-kg/m^3"<<'\n';
+    cout<<"10-t/m^3"<<'\n';
+    cout<<"Din:"; cin>>x.unit1;
+    cout<<"In:"; cin>>x.unit2;
+    cout<<"Valoare: "; cin>>x.valoare;
+    return x;
+}
+transforma Consum()
+{
+    transforma x;
+    cout<<"1-Litri la 100 km"<<'\n';
+    cout<<"2-Mile la galon"<<'\n';
+    cout<<"3-Kilometri la litru"<<'\n';
+    cout<<"Din:"; cin>>x.unit1;
+    cout<<"In:"; cin>>x.unit2;
+    cout<<"Valoare: "; cin>>x.valoare;
+    return x;
+}
+
+void initializeazaUnitati()
+{
+    initializareLungime();
+    initializareArie();
+    initializareVolum();
+    initializareTimp();
+    initializareViteza();
+    initializareTemperatura();
+    initializareMasa();
+    initializareEnergie();
+    initializarePresiune();
+    initializareDensitate();
+    initializareConsum();
+}
