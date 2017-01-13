@@ -105,7 +105,29 @@ int main()
         if(comanda==6)
         {
             transf=Temperatura();
-            rezultat=transf.valoare*transfTemperatura[transf.unit1][transf.unit2];
+            if(transf.unit1==transf.unit2)
+                rezultat=transf.valoare*transfTemperatura[transf.unit1][transf.unit2];
+            if(transf.unit1==1)
+            {
+                if(transf.unit2==2)
+                    rezultat=transf.valoare*1.8+32;
+                if(transf.unit2==3)
+                    rezultat=transf.valoare+273.15;
+            }
+            if(transf.unit1==2)
+            {
+                if(transf.unit2==1)
+                    rezultat=(transf.valoare-32)/1.8;
+                if(transf.unit2==3)
+                    rezultat=(transf.valoare+459.67)*5/9;
+            }
+            if(transf.unit1==3)
+            {
+                if(transf.unit2==1)
+                    rezultat=transf.valoare-273.15;
+                if(transf.unit2==2)
+                    rezultat=transf.valoare*9/5-459.67;
+            }
             cout<<"********************"<<'\n';
             cout<<"Rezultatul este: "<<rezultat<<'\n';
             cout<<"********************"<<'\n';
@@ -159,18 +181,18 @@ int main()
 int Meniu()
 {
     int comanda;
-    cout<<"0-Iesi din program"<<'\n';
-    cout<<"1-Lungime"<<'\n';
-    cout<<"2-Arie"<<'\n';
-    cout<<"3-Volum"<<'\n';
-    cout<<"4-Timp"<<'\n';
-    cout<<"5-Viteza"<<'\n';
-    cout<<"6-Temperatura"<<'\n';
-    cout<<"7-Masa"<<'\n';
-    cout<<"8-Energie"<<'\n';
-    cout<<"9-Presiune"<<'\n';
-    cout<<"10-Densitate"<<'\n';
-    cout<<"11-Consum combustibil"<<'\n';
+    cout<<"0->Iesi din program"<<'\n';
+    cout<<"1->Lungime"<<'\n';
+    cout<<"2->Arie"<<'\n';
+    cout<<"3->Volum"<<'\n';
+    cout<<"4->Timp"<<'\n';
+    cout<<"5->Viteza"<<'\n';
+    cout<<"6->Temperatura"<<'\n';
+    cout<<"7->Masa"<<'\n';
+    cout<<"8->Energie"<<'\n';
+    cout<<"9->Presiune"<<'\n';
+    cout<<"10->Densitate"<<'\n';
+    cout<<"11->Consum combustibil"<<'\n';
     cout<<"Alege comanda: ";
     cin>>comanda;
     return comanda;
@@ -258,13 +280,13 @@ void initializareConsum()
 transforma Lungime()
 {
     transforma x;
-    cout<<"1-milimetri"<<'\n';
-    cout<<"2-centimetri"<<'\n';
-    cout<<"3-metri"<<'\n';
-    cout<<"4-kilometri"<<'\n';
-    cout<<"5-mile"<<'\n';
-    cout<<"6-feet"<<'\n';
-    cout<<"7-inch"<<'\n';
+    cout<<"1->Milimetri"<<'\n';
+    cout<<"2->Centimetri"<<'\n';
+    cout<<"3->Metri"<<'\n';
+    cout<<"4->Kilometri"<<'\n';
+    cout<<"5->Mile"<<'\n';
+    cout<<"6->Feet"<<'\n';
+    cout<<"7->Inch"<<'\n';
     cout<<"Din: "; cin>>x.unit1;
     cout<<"In: "; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -274,15 +296,15 @@ transforma Arie()
 {
     transforma x;
 
-    cout<<"1-Milimetri Patrati"<<'\n';
-    cout<<"2-Centimetri patrati"<<'\n';
-    cout<<"3-Metri Patrati"<<'\n';
-    cout<<"4-Kilometri patrati"<<'\n';
-    cout<<"5-Ari"<<'\n';
-    cout<<"6-Acri"<<'\n';
-    cout<<"7-Hectare"<<'\n';
-    cout<<"8-Feet^2"<<'\n';
-    cout<<"9-Inch patrati"<<'\n';
+    cout<<"1->Milimetri Patrati"<<'\n';
+    cout<<"2->Centimetri patrati"<<'\n';
+    cout<<"3->Metri Patrati"<<'\n';
+    cout<<"4->Kilometri patrati"<<'\n';
+    cout<<"5->Ari"<<'\n';
+    cout<<"6->Acri"<<'\n';
+    cout<<"7->Hectare"<<'\n';
+    cout<<"8->Feet^2"<<'\n';
+    cout<<"9->Inch patrati"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -291,15 +313,15 @@ transforma Arie()
 transforma Volum()
 {
     transforma x;
-    cout<<"1-Mililitri"<<'\n';
-    cout<<"2-Centilitri"<<'\n';
-    cout<<"3-Litri"<<'\n';
-    cout<<"4-Centimetri cubi"<<'\n';
-    cout<<"5-Metri cubi"<<'\n';
-    cout<<"6-Galon"<<'\n';
-    cout<<"7-Inch cubi"<<'\n';
-    cout<<"8-Feet^3"<<'\n';
-    cout<<"9-Yard^3"<<'\n';
+    cout<<"1->Mililitri"<<'\n';
+    cout<<"2->Centilitri"<<'\n';
+    cout<<"3->Litri"<<'\n';
+    cout<<"4->Centimetri cubi"<<'\n';
+    cout<<"5->Metri cubi"<<'\n';
+    cout<<"6->Galon"<<'\n';
+    cout<<"7->Inch cubi"<<'\n';
+    cout<<"8->Feet^3"<<'\n';
+    cout<<"9->Yard^3"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -308,16 +330,16 @@ transforma Volum()
 transforma Timp()
 {
     transforma x;
-    cout<<"1-Picosecunda"<<'\n';
-    cout<<"2-Nanosecunda"<<'\n';
-    cout<<"3-Milisecunda"<<'\n';
-    cout<<"4-Secunda"<<'\n';
-    cout<<"5-Minut"<<'\n';
-    cout<<"6-Ora"<<'\n';
-    cout<<"7-Zile"<<'\n';
-    cout<<"8-Saptamani"<<'\n';
-    cout<<"10-Luni"<<'\n';
-    cout<<"12-Ani"<<'\n';
+    cout<<"1->Picosecunda"<<'\n';
+    cout<<"2->Nanosecunda"<<'\n';
+    cout<<"3->Milisecunda"<<'\n';
+    cout<<"4->Secunda"<<'\n';
+    cout<<"5->Minut"<<'\n';
+    cout<<"6->Ora"<<'\n';
+    cout<<"7->Zile"<<'\n';
+    cout<<"8->Saptamani"<<'\n';
+    cout<<"9->Luni"<<'\n';
+    cout<<"10->Ani"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -326,9 +348,9 @@ transforma Timp()
 transforma Viteza()
 {
     transforma x;
-    cout<<"1-Km/h"<<'\n';
-    cout<<"2-M/h"<<'\n';
-    cout<<"3-m/s"<<'\n';
+    cout<<"1->Km/h"<<'\n';
+    cout<<"2->M/h"<<'\n';
+    cout<<"3->m/s"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -337,9 +359,9 @@ transforma Viteza()
 transforma Temperatura()
 {
     transforma x;
-    cout<<"1-Grade Celsius"<<'\n';
-    cout<<"2-Grade Farenheit"<<'\n';
-    cout<<"3-Kelvin"<<'\n';
+    cout<<"1->Grade Celsius"<<'\n';
+    cout<<"2->Grade Farenheit"<<'\n';
+    cout<<"3->Kelvin"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -348,11 +370,11 @@ transforma Temperatura()
 transforma Masa()
 {
     transforma x;
-    cout<<"1-Miligrame"<<'\n';
-    cout<<"2-Grame"<<'\n';
-    cout<<"3-Kilograme"<<'\n';
-    cout<<"4-Pound"<<'\n';
-    cout<<"5-Tone"<<'\n';
+    cout<<"1->Miligrame"<<'\n';
+    cout<<"2->Grame"<<'\n';
+    cout<<"3->Kilograme"<<'\n';
+    cout<<"4->Pound"<<'\n';
+    cout<<"5->Tone"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -361,12 +383,12 @@ transforma Masa()
 transforma Energie()
 {
     transforma x;
-    cout<<"1-Calorii"<<'\n';
-    cout<<"2-Kilocalorii"<<'\n';
-    cout<<"3-Jouli"<<'\n';
-    cout<<"4-KiloJouli"<<'\n';
-    cout<<"5-Watt"<<'\n';
-    cout<<"6-KiloWatt"<<'\n';
+    cout<<"1->Calorii"<<'\n';
+    cout<<"2->Kilocalorii"<<'\n';
+    cout<<"3->Jouli"<<'\n';
+    cout<<"4->KiloJouli"<<'\n';
+    cout<<"5->Watt"<<'\n';
+    cout<<"6->KiloWatt"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -375,10 +397,10 @@ transforma Energie()
 transforma Presiune()
 {
     transforma x;
-    cout<<"1-Atmosfere"<<'\n';
-    cout<<"2-Bari"<<'\n';
-    cout<<"3-mmHg"<<'\n';
-    cout<<"4-Psi"<<'\n';
+    cout<<"1->Atmosfere"<<'\n';
+    cout<<"2->Bari"<<'\n';
+    cout<<"3->mmHg"<<'\n';
+    cout<<"4->Psi"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -387,16 +409,16 @@ transforma Presiune()
 transforma Densitate()
 {
     transforma x;
-    cout<<"1-mg/cm^3"<<'\n';
-    cout<<"2-mg/l"<<'\n';
-    cout<<"3-g/mm^3"<<'\n';
-    cout<<"4-g/cm^3"<<'\n';
-    cout<<"5-g/m^3"<<'\n';
-    cout<<"6-g/l"<<'\n';
-    cout<<"7-kg/cm^3"<<'\n';
-    cout<<"8-kg/l"<<'\n';
-    cout<<"9-kg/m^3"<<'\n';
-    cout<<"10-t/m^3"<<'\n';
+    cout<<"1->mg/cm^3"<<'\n';
+    cout<<"2->mg/l"<<'\n';
+    cout<<"3->g/mm^3"<<'\n';
+    cout<<"4->g/cm^3"<<'\n';
+    cout<<"5->g/m^3"<<'\n';
+    cout<<"6->g/l"<<'\n';
+    cout<<"7->kg/cm^3"<<'\n';
+    cout<<"8->kg/l"<<'\n';
+    cout<<"9->kg/m^3"<<'\n';
+    cout<<"10->t/m^3"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
@@ -405,9 +427,9 @@ transforma Densitate()
 transforma Consum()
 {
     transforma x;
-    cout<<"1-Litri la 100 km"<<'\n';
-    cout<<"2-Mile la galon"<<'\n';
-    cout<<"3-Kilometri la litru"<<'\n';
+    cout<<"1->Litri la 100 km"<<'\n';
+    cout<<"2->Mile la galon"<<'\n';
+    cout<<"3->Kilometri la litru"<<'\n';
     cout<<"Din:"; cin>>x.unit1;
     cout<<"In:"; cin>>x.unit2;
     cout<<"Valoare: "; cin>>x.valoare;
